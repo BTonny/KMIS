@@ -6,6 +6,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import com.ooad.kmis.student.Student;
+import com.ooad.kmis.student.StudentDashboard;
 import com.ooad.kmis.teacher.Dashboard;
 import com.ooad.kmis.teacher.Teacher;
 
@@ -131,7 +133,7 @@ public class Login extends JFrame {
                 
                 try {
                 	//prepared statement
-                	if(userType == "Teacher") {
+                	if(userType.intern() == "Teacher") {
                 		pst = con.prepareStatement("SELECT * FROM teachers WHERE user_name = ? and password = ?");
                 	}else {
                 		pst = con.prepareStatement("SELECT * FROM students WHERE user_name = ? and password = ?");
@@ -143,7 +145,7 @@ public class Login extends JFrame {
                 	
                 	if(rs.next()) {
                 		//if its a teacher, launch teacher dashboard.
-                		if(userType == "Teacher") {
+                		if(userType.intern() == "Teacher") {
                     		//close the login form
                 			Login.this.setVisible(false);
                 			Teacher teacher = new Teacher(rs);
@@ -151,6 +153,8 @@ public class Login extends JFrame {
                     	}else {
                     		//close the login form
                 			Login.this.setVisible(false);
+                			Student student = new Student().fromResultSet(rs);
+                			StudentDashboard.launch(student);
                     	}
 
                 		

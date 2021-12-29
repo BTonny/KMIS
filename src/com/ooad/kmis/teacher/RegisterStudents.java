@@ -38,7 +38,7 @@ public class RegisterStudents extends JFrame {
 	private JPanel contentPane;
 	private JTextField txtFirstName;
 	private JTextField txtLastName;
-	private static Students students;
+	private static StudentsPage students;
 
 	/**
 	 * Launch the application.
@@ -74,7 +74,7 @@ public class RegisterStudents extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public RegisterStudents(Students studentsPage) {
+	public RegisterStudents(StudentsPage studentsPage) {
 		students = studentsPage;
 		//initialise connection to database
 		Connect();
@@ -155,7 +155,7 @@ public class RegisterStudents extends JFrame {
                 String lastName = txtLastName.getText();
                 String gender = txtGender.getSelectedItem().toString();
                 String genderAbr;
-                if(gender == "Male") genderAbr = "M";
+                if(gender.intern() == "Male") genderAbr = "M";
                 else genderAbr = "F";
                 String pupilClass = txtClass.getSelectedItem().toString();
                 java.util.Date dob = dateChooser.getDate();

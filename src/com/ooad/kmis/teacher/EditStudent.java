@@ -39,7 +39,7 @@ public class EditStudent extends JFrame {
 	private JTextField txtFirstName;
 	private JTextField txtLastName;
 	private static Student student;
-	private static Students studentsPage;
+	private static StudentsPage studentsPage;
 
 	/**
 	 * Launch the application.
@@ -73,7 +73,7 @@ public class EditStudent extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public EditStudent(Student studentObj, Students students) {
+	public EditStudent(Student studentObj, StudentsPage students) {
 		Connect();
 		student = studentObj;
 		studentsPage = students;

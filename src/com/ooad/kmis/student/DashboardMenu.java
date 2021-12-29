@@ -1,4 +1,4 @@
-package com.ooad.kmis.teacher;
+package com.ooad.kmis.student;
 
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JSeparator;
 
 import com.ooad.kmis.auth.Login;
+
 import javax.swing.SwingConstants;
 
 public class DashboardMenu extends JPanel {
@@ -26,16 +27,17 @@ public class DashboardMenu extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public DashboardMenu(JPanel cards, JFrame mainFame, Teacher teacher) {
+	public DashboardMenu(JPanel cards, JFrame mainFame, Student student) {
 		this.setBackground(new Color(153, 204, 153));
 //		this.setBounds(0, 31, 156, 365);
-        this.setPreferredSize(new Dimension(156, 500));
+        this.setPreferredSize(new Dimension(182, 500));
         
-        JButton btnShowStudents = new JButton("Students");
-        btnShowStudents.addActionListener(new ActionListener() {
+        JButton btnShowProfile = new JButton("Profile");
+        btnShowProfile.setPreferredSize(new Dimension(150, 20));
+        btnShowProfile.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
                 CardLayout cl = (CardLayout) cards.getLayout();
-                cl.show(cards, StudentsPage.name);
+                cl.show(cards, ProfilePage.name);
             }
         });
         
@@ -56,10 +58,10 @@ public class DashboardMenu extends JPanel {
         btnLogOut.setBounds(6, 36, 88, 29);
         detailsPanel.add(btnLogOut);
         
-        JLabel lblTrFirstName = new JLabel("Tr."+teacher.firstName);
+        JLabel lblTrFirstName = new JLabel("User: "+student.userName);
         lblTrFirstName.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 13));
         lblTrFirstName.setHorizontalAlignment(SwingConstants.CENTER);
-        lblTrFirstName.setPreferredSize(new Dimension(100, 20));
+        lblTrFirstName.setPreferredSize(new Dimension(150, 20));
         add(lblTrFirstName);
         
         JSeparator separator = new JSeparator();
@@ -67,14 +69,13 @@ public class DashboardMenu extends JPanel {
         separator.setForeground(Color.LIGHT_GRAY);
         separator.setPreferredSize(new Dimension(100, 7));
         add(separator);
-        btnShowStudents.setFont(new Font("Arial Narrow", Font.PLAIN, 13));
-        add(btnShowStudents);
+        btnShowProfile.setFont(new Font("Arial Narrow", Font.PLAIN, 13));
+        add(btnShowProfile);
         
         JButton btnMarks = new JButton("Marks");
+        btnMarks.setPreferredSize(new Dimension(150, 20));
         btnMarks.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		CardLayout cl = (CardLayout) cards.getLayout();
-                cl.show(cards, MarksPage.name);
             }
         });
         btnMarks.setFont(new Font("Arial Narrow", Font.PLAIN, 13));

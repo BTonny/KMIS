@@ -26,7 +26,7 @@ import javax.swing.JScrollPane;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class Students extends JPanel {
+public class StudentsPage extends JPanel {
 	/**
 	 * 
 	 */
@@ -42,16 +42,16 @@ public class Students extends JPanel {
 			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection("jdbc:mysql://localhost:8889/kps", "root", "root");
 		} catch (ClassNotFoundException e) {
-            JOptionPane.showMessageDialog(Students.this, "Failed to locate JDBC Driver");
+            JOptionPane.showMessageDialog(StudentsPage.this, "Failed to locate JDBC Driver");
 		} catch (SQLException e) {
-            JOptionPane.showMessageDialog(Students.this, "Failed to connect to database");
+            JOptionPane.showMessageDialog(StudentsPage.this, "Failed to connect to database");
 		}
 	}
 	
 	/**
 	 * Create the panel.
 	 */
-	public Students() {
+	public StudentsPage() {
 		Connect();
         this.setPreferredSize(new Dimension(800, 450));
         setLayout(null);
@@ -64,7 +64,7 @@ public class Students extends JPanel {
         JButton btnRegisterStudents = new JButton("Register Students");
         btnRegisterStudents.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		RegisterStudents registerStudentsForm = new RegisterStudents(Students.this);
+        		RegisterStudents registerStudentsForm = new RegisterStudents(StudentsPage.this);
 				registerStudentsForm.setLocationRelativeTo(null);
         		registerStudentsForm.setVisible(true);
         	}
@@ -77,7 +77,7 @@ public class Students extends JPanel {
         panel.add(btnSearchStudent);
         btnSearchStudent.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		Search searchPage = new Search(Students.this);
+        		Search searchPage = new Search(StudentsPage.this);
         		searchPage.setLocationRelativeTo(null);
         		searchPage.setVisible(true);
         	}
@@ -92,10 +92,9 @@ public class Students extends JPanel {
         studentsTable.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseClicked(MouseEvent e) {
-        		// get data of the first shell of a JTable row
         		int row = studentsTable.getSelectedRow();
                 Student thisStudent = new Student().fromTableModel(studentsTable.getModel(), row);
-                EditStudent editStudent = new EditStudent(thisStudent, Students.this);
+                EditStudent editStudent = new EditStudent(thisStudent, StudentsPage.this);
                 editStudent.setVisible(true);
         		
         		
@@ -127,10 +126,10 @@ public class Students extends JPanel {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-			JOptionPane.showMessageDialog(Students.this, "Failed to load student data");
+			JOptionPane.showMessageDialog(StudentsPage.this, "Failed to load student data");
 		} catch (Exception ex) {
 			ex.printStackTrace();
-			JOptionPane.showMessageDialog(Students.this, "Failed to load student data");
+			JOptionPane.showMessageDialog(StudentsPage.this, "Failed to load student data");
 		}
 	}
 }

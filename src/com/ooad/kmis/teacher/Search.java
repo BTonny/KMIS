@@ -6,6 +6,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import com.ooad.kmis.student.Student;
+
 import net.proteanit.sql.DbUtils;
 
 import javax.swing.JLabel;
@@ -26,6 +28,8 @@ import java.sql.SQLException;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Search extends JFrame {
 
@@ -36,7 +40,7 @@ public class Search extends JFrame {
 	private JPanel contentPane;
 	private JTextField txtSearch;
 	private JTable table;
-	private static Students studentsPage;
+	private static StudentsPage studentsPage;
 
 	/**
 	 * Launch the application.
@@ -71,7 +75,7 @@ public class Search extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Search(Students students) {
+	public Search(StudentsPage students) {
 		studentsPage = students;
 		Connect();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -118,6 +122,25 @@ public class Search extends JFrame {
 		contentPane.add(scrollPane);
 		
 		table = new JTable();
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+        		int row = table.getSelectedRow();
+                Student thisStudent = new Student();
+				try {
+					thisStudent.registrationNo = table.getModel().getValueAt(row, 0).toString();
+					ResultSet rs = thisStudent.getProfile();
+					thisStudent = thisStudent.fromResultSet(rs);
+					
+					EditStudent editStudent = new EditStudent(thisStudent, studentsPage);
+	                editStudent.setVisible(true);
+				} catch (ClassNotFoundException | SQLException e1) {
+					JOptionPane.showMessageDialog(Search.this, "Failed to load student details");
+                    e1.printStackTrace();
+				}
+                
+			}
+		});
 		scrollPane.setViewportView(table);
 		
 		JButton btnClose = new JButton("Close");

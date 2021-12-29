@@ -1,11 +1,12 @@
-package com.ooad.kmis.teacher;
+package com.ooad.kmis.student;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
 import javax.swing.*;
 
-public class Dashboard extends JPanel {
+
+public class StudentDashboard extends JPanel {
 
 	/**
 	 * 
@@ -13,13 +14,13 @@ public class Dashboard extends JPanel {
 	private static final long serialVersionUID = 1L;
     private static final JPanel cards = new JPanel(new CardLayout());
     
-    private static Teacher teacher = new Teacher();
+    private static Student student = new Student();
 
-	public Dashboard() {
+	public StudentDashboard() {
         this.setPreferredSize(new Dimension(500, 300));
 	}
 	
-	public Dashboard(Teacher tr) {
+	public StudentDashboard(Student tr) {
 		setTeacher(tr);
         this.setPreferredSize(new Dimension(500, 300));
 	}
@@ -34,41 +35,39 @@ public class Dashboard extends JPanel {
         });
     }
     
-    public static void launch(Teacher tr) {
+    public static void launch(Student tr) {
     	main(null);
     	setTeacher(tr);
     }
 
-    public static Teacher getTeacher() {
-		return teacher;
+    public static Student getTeacher() {
+		return student;
 	}
 
-	public static void setTeacher(Teacher teacher) {
-		Dashboard.teacher = teacher;
+	public static void setTeacher(Student student) {
+		StudentDashboard.student = student;
 	}
 
 	private static void create() {
         JFrame f = new JFrame();
 		f.setLocationRelativeTo(null);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        JPanel profilePanel = new ProfilePage(student);
+        cards.add(ProfilePage.name, profilePanel);
         
-        JPanel studentsPanel = new StudentsPage();
-        cards.add(StudentsPage.name, studentsPanel);
         
-        JPanel marksPanel = new MarksPage();
-        cards.add(MarksPage.name, marksPanel);
-        
-        Dashboard marks = new Dashboard();
+        StudentDashboard marks = new StudentDashboard();
         cards.add("marks", marks);
         cards.add(marks);
-        Dashboard subjectRegister = new Dashboard();
+        StudentDashboard subjectRegister = new StudentDashboard();
         cards.add("subjectRegister", subjectRegister);
         cards.add(subjectRegister);
         
         
         
 //        JPanel control = new JPanel();
-        JPanel control = new DashboardMenu(cards, f, teacher);
+        JPanel control = new DashboardMenu(cards, f, student);
         control.add(new JButton(new AbstractAction("\u22b2Prev") {
 
             /**

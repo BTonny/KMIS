@@ -54,10 +54,9 @@ public class Student implements User{
 		Class.forName("com.mysql.jdbc.Driver");
 		con = DriverManager.getConnection("jdbc:mysql://localhost:8889/kps", "root", "root");
 		
-		preparedStatement = con.prepareStatement("SELECT * FROM students WHERE reg_no = ? and user_name = ?");
+		preparedStatement = con.prepareStatement("SELECT * FROM students WHERE reg_no = ?");
 		
 		preparedStatement.setString(1, registrationNo);
-		preparedStatement.setString(2, userName);
 		ResultSet rs = preparedStatement.executeQuery();
 
 		return rs;
@@ -97,9 +96,13 @@ public class Student implements User{
     		student.firstName = rs.getString("first_name");
     		student.lastName = rs.getString("last_name");
     		student.studentClass = rs.getString("class");
-    		String dbGender = rs.getString("gender");
-    		if(dbGender == "M") student.gender = "Male";
-            else student.gender = "Female";
+    		String dbGender = rs.getString("gender").toString();
+    		//intern the string in order for the comparison to work.
+    		if(dbGender.intern()  == "M") { 
+    			student.gender = "Male";
+    		} else {
+    			student.gender = "Female";}
+    		
     		java.sql.Date sqlDate = rs.getDate("date_of_birth");
     		student.dateOfBirth = new Date(sqlDate.getTime());
     		
@@ -115,7 +118,8 @@ public class Student implements User{
 		student.lastName = tM.getValueAt(row, 2).toString();
 
 		String dbGender = tM.getValueAt(row, 3).toString();
-		if(dbGender == "M") student.gender = "Male";
+		//intern the string
+		if(dbGender.intern() == "M") student.gender = "Male";
         else student.gender = "Female";
 
 		java.sql.Date sqlDate = (java.sql.Date) tM.getValueAt(row, 4);
