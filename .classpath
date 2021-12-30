@@ -6,12 +6,12 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Users/baw/eclipse/mysql-connector-java-8.0.27.jar">
+	<classpathentry kind="lib" path="/Users/baw/eclipse-workspace/KMIS/files/mysql-connector-java-8.0.27.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="jcalendar-1.4.jar"/>
-	<classpathentry kind="lib" path="/Users/baw/eclipse/rs2xml/rs2xml.jar"/>
+	<classpathentry kind="lib" path="/Users/baw/eclipse-workspace/KMIS/files/jcalendar-1.4.jar"/>
+	<classpathentry kind="lib" path="/Users/baw/eclipse-workspace/KMIS/files/rs2xml.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

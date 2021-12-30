@@ -5,6 +5,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import com.toedter.calendar.JDateChooser;
+
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -12,7 +15,6 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import javax.swing.JTextField;
 
-import com.toedter.calendar.JDateChooser;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
