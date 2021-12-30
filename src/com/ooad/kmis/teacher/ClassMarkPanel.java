@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import javax.swing.JTextField;
 
+import com.ooad.kmis.Subjects;
 import com.ooad.kmis.student.Student;
 
 import net.proteanit.sql.DbUtils;
@@ -42,9 +43,9 @@ public class ClassMarkPanel extends JPanel {
 	Calendar cal = Calendar.getInstance();
 	int currentYear = cal.get(Calendar.YEAR);
 	
-	String subject = "English";
-	String year = String.valueOf(currentYear);
-	String term = "1";
+	private String subject;
+	private String year;
+	private String term;
 	
 	
 	private JTextField txtSeachStudent;
@@ -65,9 +66,13 @@ public class ClassMarkPanel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public ClassMarkPanel(String tClass) {
+	public ClassMarkPanel(String tClass, String subj, String yr, String tm) {
 		Connect();
 		thisClass = tClass;
+		subject = subj;
+		year = yr;
+		term = tm;
+		
 		final String finalprovidedClass = tClass;
 		setLayout(null);
 		JPanel panel_1 = new JPanel();
@@ -179,13 +184,13 @@ public class ClassMarkPanel extends JPanel {
 	
 	public void loadMarks() {
 		try {
-			if(subject.intern() == "English") {
+			if(subject.intern() == Subjects.english.intern()) {
 				pst = con.prepareStatement("SELECT reg_no, BOT, MOT, EOT FROM english WHERE class = ? and year = ? and term = ?");
-			} else if(subject.intern() == "Math") {
+			} else if(subject.intern() == Subjects.math.intern()) {
 				pst = con.prepareStatement("SELECT reg_no, BOT, MOT, EOT FROM mathematics WHERE class = ? and year = ? and term = ?");
-			} else if(subject.intern() == "Sst") {
+			} else if(subject.intern() == Subjects.sst.intern()) {
 				pst = con.prepareStatement("SELECT reg_no, BOT, MOT, EOT FROM social_studies WHERE class = ? and year = ? and term = ?");
-			} else if(subject.intern() == "Science") {
+			} else if(subject.intern() == Subjects.science.intern()) {
 				pst = con.prepareStatement("SELECT reg_no, BOT, MOT, EOT FROM science WHERE class = ? and year = ? and term = ?");
 			} else {
 	            JOptionPane.showMessageDialog(ClassMarkPanel.this, "Invalid subject name");

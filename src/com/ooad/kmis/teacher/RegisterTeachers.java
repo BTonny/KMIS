@@ -141,7 +141,7 @@ public class RegisterTeachers extends JFrame {
 //                try {
 //                    Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:8889/kps", "root", "root");
 //
-//                    String query = "INSERT INTO teachers (first_name, last_name, subject_codes, user_name, password) VALUES ('" + firstName + "','" + lastName + "', '" + subjectsTaught + "', '" + userName + "', '" + password + "')";
+//                    String query = "INSERT INTO teachers (first_name, last_name, subject, user_name, password) VALUES ('" + firstName + "','" + lastName + "', '" + subjectsTaught + "', '" + userName + "', '" + password + "')";
 ////                    String query1 = "INSERT INTO teachers values('" + firstName + "','" + lastName + "','" + userName + "','" +
 ////                        password + "','" + emailId + "','" + mobileNumber + "')";
 //
@@ -161,7 +161,7 @@ public class RegisterTeachers extends JFrame {
 //                }
                 
                 try {
-                    pst = con.prepareStatement("INSERT INTO teachers (first_name, last_name, subject_codes, user_name) VALUES (?,?,?,?)");
+                    pst = con.prepareStatement("INSERT INTO teachers (first_name, last_name, subject, user_name) VALUES (?,?,?,?)");
                     pst.setString(1, firstName);
                     pst.setString(2, lastName);
                     pst.setString(3, subjectTaught);
@@ -181,7 +181,7 @@ public class RegisterTeachers extends JFrame {
                     chooserSubject.setSelectedIndex(-1);
                     teachersPage.loadAllTeachers();
                 } catch (SQLException sexp) {
-                	Logger.getLogger(EditStudent.class.getName()).log(Level.SEVERE, null, sexp);
+                	Logger.getLogger(EditStudent.class.getName()).log(Level.SEVERE, sexp.getMessage(), sexp);
                 }
 				
 			}

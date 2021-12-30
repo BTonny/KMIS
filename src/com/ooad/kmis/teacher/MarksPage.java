@@ -13,6 +13,8 @@ import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JTabbedPane;
+
+
 import javax.swing.JLabel;
 
 public class MarksPage extends JPanel {
@@ -22,6 +24,7 @@ public class MarksPage extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	public static String name = "Marks";
+	private static Teacher teacher;
 
 	Connection con;
 	PreparedStatement pst;
@@ -30,7 +33,7 @@ public class MarksPage extends JPanel {
 	Calendar cal = Calendar.getInstance();
 	int currentYear = cal.get(Calendar.YEAR);
 	
-	String subject = "English";
+	String subject = "";
 	String year = String.valueOf(currentYear);
 	String term = "1";
 
@@ -48,7 +51,10 @@ public class MarksPage extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public MarksPage() {
+	public MarksPage(Teacher tr) {
+		teacher = tr;
+		subject = ""+teacher.subject;
+		
 		Connect();
 		this.setPreferredSize(new Dimension(800, 450));
 		setLayout(null);
@@ -63,26 +69,26 @@ public class MarksPage extends JPanel {
 		tabbedPane.setBounds(30, 51, 741, 375);
 		add(tabbedPane);
 
-		JPanel panel_1 = new ClassMarkPanel("P1");
+		JPanel panel_1 = new ClassMarkPanel("P1", subject, year, term);
 		tabbedPane.addTab("P1", null, panel_1, null);
 		panel_1.setLayout(null);
 
-		JPanel panel_2 = new ClassMarkPanel("P2");
+		JPanel panel_2 = new ClassMarkPanel("P2", subject, year, term);
 		tabbedPane.addTab("P2", null, panel_2, null);
 
-		JPanel panel_3 = new ClassMarkPanel("P3");
+		JPanel panel_3 = new ClassMarkPanel("P3", subject, year, term);
 		tabbedPane.addTab("P3", null, panel_3, null);
 
-		JPanel panel_4 = new ClassMarkPanel("P4");
+		JPanel panel_4 = new ClassMarkPanel("P4", subject, year, term);
 		tabbedPane.addTab("P4", null, panel_4, null);
 
-		JPanel panel_5 = new ClassMarkPanel("P5");
+		JPanel panel_5 = new ClassMarkPanel("P5", subject, year, term);
 		tabbedPane.addTab("P5", null, panel_5, null);
 
-		JPanel panel_6 = new ClassMarkPanel("P6");
+		JPanel panel_6 = new ClassMarkPanel("P6", subject, year, term);
 		tabbedPane.addTab("P6", null, panel_6, null);
 
-		JPanel panel_7 = new ClassMarkPanel("P7");
+		JPanel panel_7 = new ClassMarkPanel("P7", subject, year, term);
 		tabbedPane.addTab("P7", null, panel_7, null);
 
 		JLabel lblNewLabel = new JLabel("Subject:");

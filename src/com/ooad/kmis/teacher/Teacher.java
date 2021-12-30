@@ -32,7 +32,7 @@ public class Teacher implements User{
 		this.userName = resultSet.getString("user_name");
 		this.firstName = resultSet.getString("first_name");
 		this.lastName = resultSet.getString("last_name");
-		String subjectsString = resultSet.getString("subject_codes");
+		String subjectsString = resultSet.getString("subject");
 //		this.subject = subjectsString.split(",");
 		this.subject = subjectsString;
 	}
@@ -63,7 +63,7 @@ public class Teacher implements User{
 	}
 	
 	public int editProfile(Connection connection, PreparedStatement preparedStatement)  throws SQLException {
-		preparedStatement = connection.prepareStatement("UPDATE teachers SET first_name = ?, last_name = ?, subject_codes = ?, user_name =? WHERE id = ?");
+		preparedStatement = connection.prepareStatement("UPDATE teachers SET first_name = ?, last_name = ?, subject = ?, user_name =? WHERE id = ?");
 		preparedStatement.setString(1, firstName);
 		preparedStatement.setString(2, lastName);
 		String subjectsString = String.join(",", subject);
@@ -102,7 +102,7 @@ public class Teacher implements User{
     		teacher.userName = rs.getString("user_name");
     		teacher.firstName = rs.getString("first_name");
     		teacher.lastName = rs.getString("last_name");
-    		subjectsString = rs.getString("subject_codes");
+    		subjectsString = rs.getString("subject");
 //    		subject = subjectsString.split(",");
     		teacher.subject = subjectsString;
     		

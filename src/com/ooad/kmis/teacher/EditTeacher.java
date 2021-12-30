@@ -117,7 +117,7 @@ public class EditTeacher extends JFrame {
                 String subject = txtSubject.getSelectedItem().toString();
                 
             	try {
-                    pst = con.prepareStatement("UPDATE teachers SET first_name = ?, last_name = ? subject_codes = ? WHERE id = ?");
+                    pst = con.prepareStatement("UPDATE teachers SET first_name = ?, last_name = ? subject = ? WHERE id = ?");
                     pst.setString(1, firstName);
                     pst.setString(2, lastName);
                     pst.setString(3, subject);

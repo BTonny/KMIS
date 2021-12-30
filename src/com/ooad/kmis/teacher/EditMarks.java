@@ -6,6 +6,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import com.ooad.kmis.Subjects;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -160,13 +162,13 @@ public class EditMarks extends JFrame {
 				String EOT = txtEOT.getText();
 				
 				try {
-					if(marks.subject.intern() == "English") {
+					if(marks.subject.intern() == Subjects.english.intern()) {
 	                    pst = con.prepareStatement("UPDATE english SET BOT = ?, MOT = ?, EOT = ? WHERE reg_no = ? and year = ? and term = ? and class = ?");
-					} else if(marks.subject.intern() == "Math") {
+					} else if(marks.subject.intern() == Subjects.math.intern()) {
 	                    pst = con.prepareStatement("UPDATE mathematics SET BOT = ?, MOT = ?, EOT = ? WHERE reg_no = ? and year = ? and term = ? and class = ?");
-					} else if(marks.subject.intern() == "Sst") {
+					} else if(marks.subject.intern() == Subjects.sst.intern()) {
 	                    pst = con.prepareStatement("UPDATE social_studies SET BOT = ?, MOT = ?, EOT = ? WHERE reg_no = ? and year = ? and term = ? and class = ?");
-					} else if(marks.subject.intern() == "Science") {
+					} else if(marks.subject.intern() == Subjects.science.intern()) {
 	                    pst = con.prepareStatement("UPDATE science SET BOT = ?, MOT = ?, EOT = ? WHERE reg_no = ? and year = ? and term = ? and class = ?");
 					} else {
 			            JOptionPane.showMessageDialog(EditMarks.this, "Invalid subject name");

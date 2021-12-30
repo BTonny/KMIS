@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import com.ooad.kmis.Subjects;
 import com.ooad.kmis.student.Student;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -160,13 +161,13 @@ public class EnterMarks extends JFrame {
 				String EOT = txtEOT.getText();
 				
 				try {
-					if(subject.intern() == "English") {
+					if(subject.intern() == Subjects.english.intern()) {
 	                    pst = con.prepareStatement("INSERT INTO english (reg_no, year, term, class, BOT, MOT, EOT) VALUES (?,?,?,?,?,?,?)");
-					} else if(subject.intern() == "Math") {
+					} else if(subject.intern() == Subjects.math.intern()) {
 	                    pst = con.prepareStatement("INSERT INTO mathematics (reg_no, year, term, class, BOT, MOT, EOT) VALUES (?,?,?,?,?,?,?)");
-					} else if(subject.intern() == "Sst") {
+					} else if(subject.intern() == Subjects.sst.intern()) {
 	                    pst = con.prepareStatement("INSERT INTO social_studies (reg_no, year, term, class, BOT, MOT, EOT) VALUES (?,?,?,?,?,?,?)");
-					} else if(subject.intern() == "Science") {
+					} else if(subject.intern() == Subjects.science.intern()) {
 	                    pst = con.prepareStatement("INSERT INTO science (reg_no, year, term, class, BOT, MOT, EOT) VALUES (?,?,?,?,?,?,?)");
 					} else {
 			            JOptionPane.showMessageDialog(EnterMarks.this, "Invalid subject name");
