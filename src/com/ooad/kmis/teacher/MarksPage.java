@@ -64,6 +64,16 @@ public class MarksPage extends JPanel {
 		panel.setBackground(new Color(60, 179, 113));
 		panel.setBounds(0, 0, 800, 33);
 		add(panel);
+		
+				JLabel lblNewLabel = new JLabel("Subject:");
+				lblNewLabel.setForeground(Color.WHITE);
+				panel.add(lblNewLabel);
+				lblNewLabel.setFont(new Font("Arial Narrow", Font.PLAIN, 15));
+				
+						JLabel txtSubject = new JLabel(""+subject);
+						txtSubject.setForeground(Color.WHITE);
+						panel.add(txtSubject);
+						txtSubject.setFont(new Font("Arial Narrow", Font.PLAIN, 15));
 
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBounds(30, 51, 741, 375);
@@ -90,16 +100,6 @@ public class MarksPage extends JPanel {
 
 		JPanel panel_7 = new ClassMarkPanel("P7", subject, year, term);
 		tabbedPane.addTab("P7", null, panel_7, null);
-
-		JLabel lblNewLabel = new JLabel("Subject:");
-		lblNewLabel.setFont(new Font("Arial Narrow", Font.PLAIN, 13));
-		lblNewLabel.setBounds(10, 45, 44, 16);
-		add(lblNewLabel);
-
-		JLabel txtSubject = new JLabel(""+subject);
-		txtSubject.setFont(new Font("Arial Narrow", Font.PLAIN, 13));
-		txtSubject.setBounds(54, 45, 85, 16);
-		add(txtSubject);
 
 	}
 }
