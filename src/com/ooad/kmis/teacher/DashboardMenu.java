@@ -32,6 +32,7 @@ public class DashboardMenu extends JPanel {
         this.setPreferredSize(new Dimension(156, 500));
         
         JButton btnShowStudents = new JButton("Students");
+        btnShowStudents.setPreferredSize(new Dimension(150, 20));
         btnShowStudents.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
                 CardLayout cl = (CardLayout) cards.getLayout();
@@ -71,6 +72,7 @@ public class DashboardMenu extends JPanel {
         add(btnShowStudents);
         
         JButton btnMarks = new JButton("Marks");
+        btnMarks.setPreferredSize(new Dimension(150, 20));
         btnMarks.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		CardLayout cl = (CardLayout) cards.getLayout();
@@ -81,6 +83,7 @@ public class DashboardMenu extends JPanel {
         add(btnMarks);
         
         JButton btnTeachers = new JButton("Teachers");
+        btnTeachers.setPreferredSize(new Dimension(150, 20));
         btnTeachers.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
                 CardLayout cl = (CardLayout) cards.getLayout();
