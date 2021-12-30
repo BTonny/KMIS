@@ -102,7 +102,7 @@ public class TeachersPage extends JPanel {
 	
 	public void loadAllTeachers() {
 		try {
-			pst = con.prepareStatement("SELECT * FROM teachers");
+			pst = con.prepareStatement("SELECT id, first_name, last_name, subject, user_name FROM teachers");
 			rs = pst.executeQuery();
 			//use the DButils jar package for populating teacher data.
 			//automatically into the table.

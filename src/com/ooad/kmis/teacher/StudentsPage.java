@@ -95,6 +95,7 @@ public class StudentsPage extends JPanel {
         		int row = studentsTable.getSelectedRow();
                 Student thisStudent = new Student().fromTableModel(studentsTable.getModel(), row);
                 EditStudent editStudent = new EditStudent(thisStudent, StudentsPage.this);
+                editStudent.setLocationRelativeTo(null);
                 editStudent.setVisible(true);
         		
         		
@@ -118,7 +119,7 @@ public class StudentsPage extends JPanel {
 	
 	public void loadAllStudents() {
 		try {
-			pst = con.prepareStatement("SELECT * FROM students");
+			pst = con.prepareStatement("SELECT reg_no, first_name, last_name, gender, date_of_birth, class, user_name FROM students");
 			rs = pst.executeQuery();
 			//use the DButils jar package for populating student data.
 			//automatically into the table.

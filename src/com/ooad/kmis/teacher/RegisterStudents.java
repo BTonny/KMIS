@@ -77,7 +77,7 @@ public class RegisterStudents extends JFrame {
 		students = studentsPage;
 		//initialise connection to database
 		Connect();
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		setBounds(100, 100, 474, 372);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

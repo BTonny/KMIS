@@ -9,7 +9,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
-import java.awt.Toolkit;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -79,8 +78,7 @@ public class RegisterTeachers extends JFrame {
 		teachersPage = parent;
 		//initialise connection to database
 		Connect();
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\User\\Desktop\\STDM.jpg"));
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
         setBounds(450, 190, 471, 392);
         setResizable(true);
         contentPane = new JPanel();
