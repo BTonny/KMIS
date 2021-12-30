@@ -13,7 +13,6 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 
-import com.ooad.kmis.StudentRegister;
 import com.ooad.kmis.student.Student;
 import com.toedter.calendar.JDateChooser;
 import javax.swing.JButton;
@@ -177,7 +176,7 @@ public class EditStudent extends JFrame {
                     EditStudent.this.setVisible(false);
                     studentsPage.loadAllStudents();
                 } catch (SQLException sexp) {
-                	Logger.getLogger(StudentRegister.class.getName()).log(Level.SEVERE, null, sexp);
+                	Logger.getLogger(EditStudent.class.getName()).log(Level.SEVERE, null, sexp);
                 }
 			}
 		});
@@ -208,7 +207,7 @@ public class EditStudent extends JFrame {
                     EditStudent.this.setVisible(false);
                     studentsPage.loadAllStudents();
                 } catch (SQLException sexp) {
-                	Logger.getLogger(StudentRegister.class.getName()).log(Level.SEVERE, null, sexp);
+                	Logger.getLogger(EditStudent.class.getName()).log(Level.SEVERE, null, sexp);
                 }
 			}
 		});

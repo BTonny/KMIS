@@ -1,7 +1,6 @@
 package com.ooad.kmis.student;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
 
 import javax.swing.*;
 
@@ -56,44 +55,10 @@ public class StudentDashboard extends JPanel {
         JPanel profilePanel = new ProfilePage(student);
         cards.add(ProfilePage.name, profilePanel);
         
+        JPanel marksPanel = new MarksPage(student);
+        cards.add(MarksPage.name, marksPanel);
         
-        StudentDashboard marks = new StudentDashboard();
-        cards.add("marks", marks);
-        cards.add(marks);
-        StudentDashboard subjectRegister = new StudentDashboard();
-        cards.add("subjectRegister", subjectRegister);
-        cards.add(subjectRegister);
-        
-        
-        
-//        JPanel control = new JPanel();
         JPanel control = new DashboardMenu(cards, f, student);
-        control.add(new JButton(new AbstractAction("\u22b2Prev") {
-
-            /**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
-
-			@Override
-            public void actionPerformed(ActionEvent e) {
-                CardLayout cl = (CardLayout) cards.getLayout();
-                cl.previous(cards);
-            }
-        }));
-        control.add(new JButton(new AbstractAction("Next\u22b3") {
-
-            /**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
-
-			@Override
-            public void actionPerformed(ActionEvent e) {
-                CardLayout cl = (CardLayout) cards.getLayout();
-                cl.next(cards);
-            }
-        }));
         
         f.add(cards, BorderLayout.CENTER);
         f.add(control, BorderLayout.WEST);

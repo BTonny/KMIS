@@ -76,6 +76,8 @@ public class DashboardMenu extends JPanel {
         btnMarks.setPreferredSize(new Dimension(150, 20));
         btnMarks.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
+                CardLayout cl = (CardLayout) cards.getLayout();
+                cl.show(cards, MarksPage.name);
             }
         });
         btnMarks.setFont(new Font("Arial Narrow", Font.PLAIN, 13));

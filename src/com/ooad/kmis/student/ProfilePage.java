@@ -19,8 +19,6 @@ import javax.swing.JLabel;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 
-
-
 public class ProfilePage extends JPanel {
 
 	/**
@@ -61,13 +59,23 @@ public class ProfilePage extends JPanel {
         JButton btnEditProfile = new JButton("Edit Profile");
         btnEditProfile.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
+                EditProfile editProfile = new EditProfile(student, ProfilePage.this);
+                editProfile.setLocationRelativeTo(null);
+                editProfile.setVisible(true);
         	}
         });
         btnEditProfile.setFont(new Font("Arial Narrow", Font.PLAIN, 13));
         btnEditProfile.setBounds(103, 271, 119, 29);
         add(btnEditProfile);
         
-        JButton btnChangeCredentials = new JButton("Change Credentials");
+        JButton btnChangeCredentials = new JButton("Change Password");
+        btnChangeCredentials.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+                EditPassword editPassword = new EditPassword(student);
+                editPassword.setLocationRelativeTo(null);
+                editPassword.setVisible(true);
+        	}
+        });
         btnChangeCredentials.setFont(new Font("Arial Narrow", Font.PLAIN, 13));
         btnChangeCredentials.setBounds(103, 312, 119, 29);
         add(btnChangeCredentials);
@@ -83,7 +91,7 @@ public class ProfilePage extends JPanel {
         
         JSeparator separator = new JSeparator();
         separator.setOrientation(SwingConstants.VERTICAL);
-        separator.setBounds(144, 24, 19, 242);
+        separator.setBounds(144, 24, 19, 174);
         panel_1.add(separator);
         
         JLabel lblLastName = new JLabel("First Name");
@@ -164,6 +172,26 @@ public class ProfilePage extends JPanel {
         btnRefreshProfile.setBounds(92, 259, 119, 29);
         panel_1.add(btnRefreshProfile);
         
+        JSeparator separator_1 = new JSeparator();
+        separator_1.setBounds(21, 42, 346, 16);
+        panel_1.add(separator_1);
+        
+        JSeparator separator_1_1 = new JSeparator();
+        separator_1_1.setBounds(21, 72, 346, 16);
+        panel_1.add(separator_1_1);
+        
+        JSeparator separator_1_2 = new JSeparator();
+        separator_1_2.setBounds(21, 102, 346, 16);
+        panel_1.add(separator_1_2);
+        
+        JSeparator separator_1_3 = new JSeparator();
+        separator_1_3.setBounds(21, 130, 346, 16);
+        panel_1.add(separator_1_3);
+        
+        JSeparator separator_1_4 = new JSeparator();
+        separator_1_4.setBounds(21, 158, 346, 16);
+        panel_1.add(separator_1_4);
+        
         
         
 
@@ -172,6 +200,7 @@ public class ProfilePage extends JPanel {
 	public void reloadStudentProfile() {
 		try {
 			ResultSet rs = student.getProfile();
+			rs.next();
 			Student newStudent = student.fromResultSet(rs);
 			student = newStudent;
 		} catch (SQLException e) {

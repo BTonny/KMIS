@@ -31,6 +31,14 @@ public class Student implements User{
 		this.userName = userName;
 	}
 	
+	public Student(String userId, String firstName, String lastName, String username, Date dob) {
+		this.registrationNo = userId;
+		this.userName = username;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.dateOfBirth = dob;
+	}
+	
 	public Student(ResultSet resultSet) throws SQLException {
 		this.registrationNo = resultSet.getString("reg_no");
 		this.userName = resultSet.getString("user_name");
@@ -62,51 +70,74 @@ public class Student implements User{
 		return rs;
 	}
 	
-	public ResultSet editProfile(Connection connection, PreparedStatement preparedStatement)  throws SQLException {
-		preparedStatement = connection.prepareStatement("UPDATE students SET first_name = ?, last_name = ?, date_of_birth = ?, class = ?, user_name =? WHERE reg_no = ?");
+	public int editProfile(Connection connection, PreparedStatement preparedStatement)  throws SQLException {
+		preparedStatement = connection.prepareStatement("UPDATE students SET first_name = ?, last_name = ?, date_of_birth = ?, user_name =? WHERE reg_no = ?");
 		preparedStatement.setString(1, firstName);
 		preparedStatement.setString(2, lastName);
 		java.sql.Date sqlDate = new java.sql.Date(dateOfBirth.getTime());
 		preparedStatement.setDate(3, sqlDate);
-		preparedStatement.setString(4, studentClass);
-		preparedStatement.setString(5, userName);
-		preparedStatement.setString(6, registrationNo);
-		ResultSet rs = preparedStatement.executeQuery();
-		return rs;
+		preparedStatement.setString(4, userName);
+		preparedStatement.setString(5, registrationNo);
+		int res = preparedStatement.executeUpdate();
+		preparedStatement.close();
+		return res;
 	}
 	
-	public boolean changePassword(Connection connection, PreparedStatement preparedStatement, String newPassword)  throws SQLException {
-		preparedStatement = connection.prepareStatement("UPDATE students SET password = ? WHERE reg_no = ?");
+	public int editProfile()  throws SQLException, ClassNotFoundException {
+		Connection con;
+		PreparedStatement preparedStatement;
+
+		Class.forName("com.mysql.jdbc.Driver");
+		con = DriverManager.getConnection("jdbc:mysql://localhost:8889/kps", "root", "root");
+		
+		preparedStatement = con.prepareStatement("UPDATE students SET first_name = ?, last_name = ?, date_of_birth = ?, user_name =? WHERE reg_no = ?");
+		preparedStatement.setString(1, firstName);
+		preparedStatement.setString(2, lastName);
+		java.sql.Date sqlDate = new java.sql.Date(dateOfBirth.getTime());
+		preparedStatement.setDate(3, sqlDate);
+		preparedStatement.setString(4, userName);
+		preparedStatement.setString(5, registrationNo);
+		int result = preparedStatement.executeUpdate();
+		preparedStatement.close();
+		return result;
+	}
+	
+	public boolean changePassword(String newPassword)  throws SQLException, ClassNotFoundException {
+		Connection con;
+		PreparedStatement preparedStatement;
+
+		Class.forName("com.mysql.jdbc.Driver");
+		con = DriverManager.getConnection("jdbc:mysql://localhost:8889/kps", "root", "root");
+		
+		preparedStatement = con.prepareStatement("UPDATE students SET password = ? WHERE reg_no = ?");
 		preparedStatement.setString(1, newPassword);
 		preparedStatement.setString(2, registrationNo);
 		
-		ResultSet rs = preparedStatement.executeQuery();
+		int res = preparedStatement.executeUpdate();
 		boolean result = false;
-		if(rs.next()) {
+		if(res > 0) {
     		result = true;
     	}
+		preparedStatement.close();
 		return result;
 	}
 	
 	public Student fromResultSet (ResultSet rs) throws SQLException {
 		Student student = new Student();
-    	if(rs.next()) {
-    		student.registrationNo = rs.getString("reg_no");
-    		student.userName = rs.getString("user_name");
-    		student.firstName = rs.getString("first_name");
-    		student.lastName = rs.getString("last_name");
-    		student.studentClass = rs.getString("class");
-    		String dbGender = rs.getString("gender").toString();
-    		//intern the string in order for the comparison to work.
-    		if(dbGender.intern()  == "M") { 
-    			student.gender = "Male";
-    		} else {
-    			student.gender = "Female";}
-    		
-    		java.sql.Date sqlDate = rs.getDate("date_of_birth");
-    		student.dateOfBirth = new Date(sqlDate.getTime());
-    		
-    	}
+		student.registrationNo = rs.getString("reg_no");
+		student.userName = rs.getString("user_name");
+		student.firstName = rs.getString("first_name");
+		student.lastName = rs.getString("last_name");
+		student.studentClass = rs.getString("class");
+		String dbGender = rs.getString("gender").toString();
+		//intern the string in order for the comparison to work.
+		if(dbGender.intern()  == "M") { 
+			student.gender = "Male";
+		} else {
+			student.gender = "Female";}
+		
+		java.sql.Date sqlDate = rs.getDate("date_of_birth");
+		student.dateOfBirth = new Date(sqlDate.getTime());
     	
     	return student;
 	}

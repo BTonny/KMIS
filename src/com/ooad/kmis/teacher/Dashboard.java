@@ -1,7 +1,6 @@
 package com.ooad.kmis.teacher;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
 
 import javax.swing.*;
 
@@ -69,32 +68,32 @@ public class Dashboard extends JPanel {
         
 //        JPanel control = new JPanel();
         JPanel control = new DashboardMenu(cards, f, teacher);
-        control.add(new JButton(new AbstractAction("\u22b2Prev") {
-
-            /**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
-
-			@Override
-            public void actionPerformed(ActionEvent e) {
-                CardLayout cl = (CardLayout) cards.getLayout();
-                cl.previous(cards);
-            }
-        }));
-        control.add(new JButton(new AbstractAction("Next\u22b3") {
-
-            /**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
-
-			@Override
-            public void actionPerformed(ActionEvent e) {
-                CardLayout cl = (CardLayout) cards.getLayout();
-                cl.next(cards);
-            }
-        }));
+//        control.add(new JButton(new AbstractAction("\u22b2Prev") {
+//
+//            /**
+//			 * 
+//			 */
+//			private static final long serialVersionUID = 1L;
+//
+//			@Override
+//            public void actionPerformed(ActionEvent e) {
+//                CardLayout cl = (CardLayout) cards.getLayout();
+//                cl.previous(cards);
+//            }
+//        }));
+//        control.add(new JButton(new AbstractAction("Next\u22b3") {
+//
+//            /**
+//			 * 
+//			 */
+//			private static final long serialVersionUID = 1L;
+//
+//			@Override
+//            public void actionPerformed(ActionEvent e) {
+//                CardLayout cl = (CardLayout) cards.getLayout();
+//                cl.next(cards);
+//            }
+//        }));
         
         f.add(cards, BorderLayout.CENTER);
         f.add(control, BorderLayout.WEST);

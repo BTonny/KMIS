@@ -14,7 +14,6 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 
-import com.ooad.kmis.StudentRegister;
 import com.toedter.calendar.JDateChooser;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -175,7 +174,7 @@ public class RegisterStudents extends JFrame {
                     pst.setString(5, pupilClass);
                     pst.setString(6, userName);
                     pst.executeUpdate();
-                    JOptionPane.showMessageDialog(RegisterStudents.this, "Student registered sucefully");
+                    JOptionPane.showMessageDialog(RegisterStudents.this, "Student registered succesfully");
                     txtFirstName.setText("");
                     txtLastName.setText("");
                     txtGender.setSelectedIndex(-1);
@@ -183,7 +182,7 @@ public class RegisterStudents extends JFrame {
                     txtFirstName.requestFocus();
                     studentsPage.loadAllStudents();
                 } catch (SQLException sexp) {
-                	Logger.getLogger(StudentRegister.class.getName()).log(Level.SEVERE, null, sexp);
+                	Logger.getLogger(EditStudent.class.getName()).log(Level.SEVERE, null, sexp);
                 }
 			}
 			

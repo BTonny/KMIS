@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Calendar;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -13,7 +14,6 @@ import javax.swing.JLabel;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 import java.awt.Font;
-import javax.swing.JButton;
 
 public class MarksPage extends JPanel {
 
@@ -46,14 +46,49 @@ public class MarksPage extends JPanel {
 		Connect();
         this.setPreferredSize(new Dimension(800, 450));
         setLayout(null);
+
+		Calendar cal = Calendar.getInstance();
+		int currentYear = cal.get(Calendar.YEAR);
+		Marks englishMarks = new Marks("English", String.valueOf(currentYear), "1");;
+		Marks mathMarks = new Marks("Mathematics", String.valueOf(currentYear), "1");;
+		Marks sstMarks = new Marks("SocialStudies", String.valueOf(currentYear), "1");;
+		Marks scienceMarks = new Marks("Science", String.valueOf(currentYear), "1");;
         
         try {
 			pst = con.prepareStatement("SELECT * FROM english WHERE reg_no = ? and year = ? and term = ?");
 	        pst.setString(1, student.registrationNo);
-	        pst.setString(1, "2021");
-	        pst.setString(1, "1");
-
+	        pst.setString(2, "2021");
+	        pst.setString(3, "1");
 			rs = pst.executeQuery();
+			rs.next();
+//			englishMarks.subject = "English";
+//			englishMarks.year = String.format("%s", currentYear);
+//			englishMarks.term = "1";
+			englishMarks = englishMarks.fromResultSet(rs);
+			
+			pst = con.prepareStatement("SELECT * FROM mathematics WHERE reg_no = ? and year = ? and term = ?");
+	        pst.setString(1, student.registrationNo);
+	        pst.setString(2, "2021");
+	        pst.setString(3, "1");
+			rs = pst.executeQuery();
+			rs.next();
+			mathMarks = mathMarks.fromResultSet(rs);
+			
+			pst = con.prepareStatement("SELECT * FROM social_studies WHERE reg_no = ? and year = ? and term = ?");
+	        pst.setString(1, student.registrationNo);
+	        pst.setString(2, "2021");
+	        pst.setString(3, "1");
+			rs = pst.executeQuery();
+			rs.next();
+			sstMarks = sstMarks.fromResultSet(rs);
+			
+			pst = con.prepareStatement("SELECT * FROM science WHERE reg_no = ? and year = ? and term = ?");
+	        pst.setString(1, student.registrationNo);
+	        pst.setString(2, "2021");
+	        pst.setString(3, "1");
+			rs = pst.executeQuery();
+			rs.next();
+			scienceMarks = scienceMarks.fromResultSet(rs);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -66,7 +101,7 @@ public class MarksPage extends JPanel {
         
         JSeparator separator = new JSeparator();
         separator.setOrientation(SwingConstants.VERTICAL);
-        separator.setBounds(113, 48, 19, 183);
+        separator.setBounds(113, 20, 19, 144);
         panel_1.add(separator);
         
         JLabel lblEnglish = new JLabel("English");
@@ -85,47 +120,42 @@ public class MarksPage extends JPanel {
         lblNewLabel_1_1_1.setBounds(21, 142, 111, 16);
         panel_1.add(lblNewLabel_1_1_1);
         
-        JLabel txtEnglishBOT = new JLabel("<dynamic>");
+        JLabel txtEnglishBOT = new JLabel(""+englishMarks.bot);
         txtEnglishBOT.setFont(new Font("Arial Narrow", Font.PLAIN, 15));
         txtEnglishBOT.setBounds(144, 55, 67, 16);
         panel_1.add(txtEnglishBOT);
         
-        JLabel txtSstBOT = new JLabel("<dynamic>");
+        JLabel txtSstBOT = new JLabel(""+sstMarks.bot);
         txtSstBOT.setFont(new Font("Arial Narrow", Font.PLAIN, 15));
         txtSstBOT.setBounds(144, 86, 67, 16);
         panel_1.add(txtSstBOT);
         
-        JLabel txtMathBOT = new JLabel("<dynamic>");
+        JLabel txtMathBOT = new JLabel(""+mathMarks.bot);
         txtMathBOT.setFont(new Font("Arial Narrow", Font.PLAIN, 15));
         txtMathBOT.setBounds(144, 114, 67, 16);
         panel_1.add(txtMathBOT);
         
-        JLabel txtScienceBOT = new JLabel("bot");
+        JLabel txtScienceBOT = new JLabel(""+scienceMarks.bot);
         txtScienceBOT.setFont(new Font("Arial Narrow", Font.PLAIN, 15));
         txtScienceBOT.setBounds(144, 142, 67, 16);
         panel_1.add(txtScienceBOT);
         
-        JButton btnRefreshMarks = new JButton("Reload Marks");
-        btnRefreshMarks.setFont(new Font("Arial Narrow", Font.PLAIN, 13));
-        btnRefreshMarks.setBounds(92, 259, 119, 29);
-        panel_1.add(btnRefreshMarks);
-        
         JSeparator separator_1 = new JSeparator();
         separator_1.setOrientation(SwingConstants.VERTICAL);
-        separator_1.setBounds(223, 48, 19, 183);
+        separator_1.setBounds(223, 20, 19, 144);
         panel_1.add(separator_1);
         
-        JLabel txtEnglishMOT = new JLabel("<dynamic>");
+        JLabel txtEnglishMOT = new JLabel(""+englishMarks.mot);
         txtEnglishMOT.setFont(new Font("Arial Narrow", Font.PLAIN, 15));
         txtEnglishMOT.setBounds(254, 55, 67, 16);
         panel_1.add(txtEnglishMOT);
         
         JSeparator separator_1_1 = new JSeparator();
         separator_1_1.setOrientation(SwingConstants.VERTICAL);
-        separator_1_1.setBounds(333, 48, 19, 183);
+        separator_1_1.setBounds(333, 20, 19, 144);
         panel_1.add(separator_1_1);
         
-        JLabel txtEnglishEOT = new JLabel("<dynamic>");
+        JLabel txtEnglishEOT = new JLabel(""+englishMarks.eot);
         txtEnglishEOT.setFont(new Font("Arial Narrow", Font.PLAIN, 15));
         txtEnglishEOT.setBounds(364, 55, 67, 16);
         panel_1.add(txtEnglishEOT);
@@ -146,35 +176,51 @@ public class MarksPage extends JPanel {
         lblEndOfTerm.setBounds(345, 20, 86, 16);
         panel_1.add(lblEndOfTerm);
         
-        JLabel txtSstMOT = new JLabel("<dynamic>");
+        JLabel txtSstMOT = new JLabel(""+sstMarks.mot);
         txtSstMOT.setFont(new Font("Arial Narrow", Font.PLAIN, 15));
         txtSstMOT.setBounds(254, 86, 67, 16);
         panel_1.add(txtSstMOT);
         
-        JLabel txtSstEOT = new JLabel("<dynamic>");
+        JLabel txtSstEOT = new JLabel(""+sstMarks.eot);
         txtSstEOT.setFont(new Font("Arial Narrow", Font.PLAIN, 15));
         txtSstEOT.setBounds(364, 86, 67, 16);
         panel_1.add(txtSstEOT);
         
-        JLabel txtMathMOT = new JLabel("<dynamic>");
+        JLabel txtMathMOT = new JLabel(""+mathMarks.mot);
         txtMathMOT.setFont(new Font("Arial Narrow", Font.PLAIN, 15));
         txtMathMOT.setBounds(254, 114, 67, 16);
         panel_1.add(txtMathMOT);
         
-        JLabel txtMathEOT = new JLabel("<dynamic>");
+        JLabel txtMathEOT = new JLabel(""+mathMarks.eot);
         txtMathEOT.setFont(new Font("Arial Narrow", Font.PLAIN, 15));
         txtMathEOT.setBounds(364, 114, 67, 16);
         panel_1.add(txtMathEOT);
         
-        JLabel txtScienceMOT = new JLabel("bot");
+        JLabel txtScienceMOT = new JLabel(""+scienceMarks.mot);
         txtScienceMOT.setFont(new Font("Arial Narrow", Font.PLAIN, 15));
         txtScienceMOT.setBounds(254, 142, 67, 16);
         panel_1.add(txtScienceMOT);
         
-        JLabel txtScienceEOT = new JLabel("bot");
+        JLabel txtScienceEOT = new JLabel(""+scienceMarks.eot);
         txtScienceEOT.setFont(new Font("Arial Narrow", Font.PLAIN, 15));
         txtScienceEOT.setBounds(364, 142, 67, 16);
         panel_1.add(txtScienceEOT);
+        
+        JSeparator separator_1_2 = new JSeparator();
+        separator_1_2.setBounds(21, 72, 433, 16);
+        panel_1.add(separator_1_2);
+        
+        JSeparator separator_1_2_1 = new JSeparator();
+        separator_1_2_1.setBounds(21, 101, 433, 16);
+        panel_1.add(separator_1_2_1);
+        
+        JSeparator separator_1_2_2 = new JSeparator();
+        separator_1_2_2.setBounds(21, 129, 433, 16);
+        panel_1.add(separator_1_2_2);
+        
+        JSeparator separator_1_2_3 = new JSeparator();
+        separator_1_2_3.setBounds(21, 159, 433, 16);
+        panel_1.add(separator_1_2_3);
         
         JLabel lblMarks = new JLabel("Marks");
         lblMarks.setFont(new Font("Arial Narrow", Font.PLAIN, 20));

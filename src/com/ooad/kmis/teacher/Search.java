@@ -138,7 +138,6 @@ public class Search extends JFrame {
 					JOptionPane.showMessageDialog(Search.this, "Failed to load student details");
                     e1.printStackTrace();
 				}
-                
 			}
 		});
 		scrollPane.setViewportView(table);

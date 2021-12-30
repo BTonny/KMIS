@@ -59,7 +59,7 @@ public class Teacher implements User{
     	return rs;
 	}
 	
-	public ResultSet editProfile(Connection connection, PreparedStatement preparedStatement)  throws SQLException {
+	public int editProfile(Connection connection, PreparedStatement preparedStatement)  throws SQLException {
 		preparedStatement = connection.prepareStatement("UPDATE teachers SET first_name = ?, last_name = ?, subject_codes = ?, user_name =? WHERE id = ?");
 		preparedStatement.setString(1, firstName);
 		preparedStatement.setString(2, lastName);
@@ -67,20 +67,27 @@ public class Teacher implements User{
 		preparedStatement.setString(3, subjectsString);
 		preparedStatement.setString(4, userName);
 		preparedStatement.setString(5, userId);
-		ResultSet rs = preparedStatement.executeQuery();
-    	return rs;
+		int result = preparedStatement.executeUpdate();
+    	return result;
 	}
 	
-	public boolean changePassword(Connection connection, PreparedStatement preparedStatement, String newPassword)  throws SQLException {
-		preparedStatement = connection.prepareStatement("UPDATE teachers SET password = ? WHERE id = ?");
+	public boolean changePassword(String newPassword)  throws SQLException, ClassNotFoundException {
+		Connection con;
+		PreparedStatement preparedStatement;
+
+		Class.forName("com.mysql.jdbc.Driver");
+		con = DriverManager.getConnection("jdbc:mysql://localhost:8889/kps", "root", "root");
+		
+		preparedStatement = con.prepareStatement("UPDATE teachers SET password = ? WHERE id = ?");
 		preparedStatement.setString(1, newPassword);
 		preparedStatement.setString(2, userId);
 		
-		ResultSet rs = preparedStatement.executeQuery();
+		int res = preparedStatement.executeUpdate();
 		boolean result = false;
-		if(rs.next()) {
+		if(res > 0) {
     		result = true;
     	}
+		preparedStatement.close();
 		return result;
 	}
 	
