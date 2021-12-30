@@ -79,6 +79,16 @@ public class DashboardMenu extends JPanel {
         });
         btnMarks.setFont(new Font("Arial Narrow", Font.PLAIN, 13));
         add(btnMarks);
+        
+        JButton btnTeachers = new JButton("Teachers");
+        btnTeachers.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+                CardLayout cl = (CardLayout) cards.getLayout();
+                cl.show(cards, TeachersPage.name);
+        	}
+        });
+        btnTeachers.setFont(new Font("Arial Narrow", Font.PLAIN, 13));
+        add(btnTeachers);
 	}
 
 }

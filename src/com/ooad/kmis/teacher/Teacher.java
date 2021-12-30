@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.swing.table.TableModel;
+
 import com.ooad.kmis.User;
 
 public class Teacher implements User{
@@ -13,7 +15,7 @@ public class Teacher implements User{
 	public String userName;
 	public String firstName;
 	public String lastName;
-	public String[] subjectCodes;
+	public String subject;
 	
 	public Teacher() {
 		this.userId = "";
@@ -31,7 +33,8 @@ public class Teacher implements User{
 		this.firstName = resultSet.getString("first_name");
 		this.lastName = resultSet.getString("last_name");
 		String subjectsString = resultSet.getString("subject_codes");
-		this.subjectCodes = subjectsString.split(",");
+//		this.subject = subjectsString.split(",");
+		this.subject = subjectsString;
 	}
 	
 	public ResultSet getProfile(Connection connection, PreparedStatement preparedStatement) throws SQLException {
@@ -63,7 +66,7 @@ public class Teacher implements User{
 		preparedStatement = connection.prepareStatement("UPDATE teachers SET first_name = ?, last_name = ?, subject_codes = ?, user_name =? WHERE id = ?");
 		preparedStatement.setString(1, firstName);
 		preparedStatement.setString(2, lastName);
-		String subjectsString = String.join(",", subjectCodes);
+		String subjectsString = String.join(",", subject);
 		preparedStatement.setString(3, subjectsString);
 		preparedStatement.setString(4, userName);
 		preparedStatement.setString(5, userId);
@@ -100,11 +103,24 @@ public class Teacher implements User{
     		teacher.firstName = rs.getString("first_name");
     		teacher.lastName = rs.getString("last_name");
     		subjectsString = rs.getString("subject_codes");
-    		subjectCodes = subjectsString.split(",");
+//    		subject = subjectsString.split(",");
+    		teacher.subject = subjectsString;
+    		
     		
     	}
     	
     	return teacher;
+	}
+	
+	public Teacher fromTableModel(TableModel tM, int row) {
+		Teacher teacher = new Teacher();
+		teacher.userId = tM.getValueAt(row, 0).toString();
+		teacher.firstName = tM.getValueAt(row, 1).toString();
+		teacher.lastName = tM.getValueAt(row, 2).toString();
+		teacher.subject = tM.getValueAt(row, 3).toString();
+		teacher.userName = tM.getValueAt(row, 4).toString();
+		
+		return teacher;
 	}
 
 }

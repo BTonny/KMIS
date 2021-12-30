@@ -1,7 +1,6 @@
 package com.ooad.kmis.teacher;
 
 import java.awt.*;
-
 import javax.swing.*;
 
 public class Dashboard extends JPanel {
@@ -56,13 +55,16 @@ public class Dashboard extends JPanel {
         
         JPanel marksPanel = new MarksPage();
         cards.add(MarksPage.name, marksPanel);
+
+        JPanel teachersPanel = new TeachersPage();
+        cards.add(TeachersPage.name, teachersPanel);
         
-        Dashboard marks = new Dashboard();
-        cards.add("marks", marks);
-        cards.add(marks);
-        Dashboard subjectRegister = new Dashboard();
-        cards.add("subjectRegister", subjectRegister);
-        cards.add(subjectRegister);
+//        Dashboard marks = new Dashboard();
+//        cards.add("marks", marks);
+//        cards.add(marks);
+//        Dashboard subjectRegister = new Dashboard();
+//        cards.add("subjectRegister", subjectRegister);
+//        cards.add(subjectRegister);
         
         
         

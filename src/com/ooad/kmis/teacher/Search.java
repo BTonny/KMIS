@@ -130,6 +130,7 @@ public class Search extends JFrame {
 				try {
 					thisStudent.registrationNo = table.getModel().getValueAt(row, 0).toString();
 					ResultSet rs = thisStudent.getProfile();
+					rs.next();
 					thisStudent = thisStudent.fromResultSet(rs);
 					
 					EditStudent editStudent = new EditStudent(thisStudent, studentsPage);
