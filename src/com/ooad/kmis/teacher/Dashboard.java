@@ -1,9 +1,6 @@
 package com.ooad.kmis.teacher;
 
 import java.awt.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import javax.swing.*;
 
 public class Dashboard extends JPanel {
@@ -56,8 +53,6 @@ public class Dashboard extends JPanel {
         JPanel studentsPanel = new StudentsPage();
         cards.add(StudentsPage.name, studentsPanel);
 
-    	Logger.getLogger(EditStudent.class.getName()).log(Level.SEVERE, teacher.subject, "Subject");
-    	
         JPanel marksPanel = new MarksPage(teacher);
         cards.add(MarksPage.name, marksPanel);
 
